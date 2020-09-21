@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ussd simulator integration example</title>
+</head>
+<body>
+    <label for="phone-number">Phone number:</label>
+    <input type="text" id="phone-number">
+    <br><br>
+    <button id="new-session">Start new session</button>
+    <textarea readonly rows="10" id="screen"></textarea>
+    <label for="prompt">Prompt:</label>
+    <input type="number" id="prompt">
+    <button id="send">Send</button>
+    
+    <script src="../../dist/html-ussd-simulator/html-ussd-simulator.min.js"></script>
+
+    <script>
+        const options = {
+            display: {
+                outputScreenElId: 'screen'
+            },
+            input: {
+                promptElId: 'prompt',
+                phoneNumberElId: 'phone-number'
+            },
+            button: {
+                newSessionElId: 'new-session',
+                sendElId: 'send'
+            },
+            params: {
+                serviceNumber: '123', // service phone number
+                endpoint: 'http://localhost:3000/ussd', // needs to be a working url
+                authorizationHeader: 'Token valid_token',
+                languageCode: 'ENU'
+            },
+            plugins: ['configBrowserSavable']
+        }
+        new USSDGatewayTalker(options);
+    </script>
+</body>
+</html>
